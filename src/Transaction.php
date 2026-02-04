@@ -7,7 +7,10 @@ namespace Hibla\Sql;
 use Hibla\Promise\Interfaces\PromiseInterface;
 
 /**
- * Contract for database transactions.
+ * Interface for database transaction operations.
+ *
+ * Provides a unified API for transaction control, query execution,
+ * and savepoint management.
  */
 interface Transaction
 {
@@ -16,7 +19,7 @@ interface Transaction
      *
      * @param string $sql SQL query to execute with optional ? placeholders
      * @param array<int, mixed> $params Optional parameters for prepared statement
-     * @return PromiseInterface<QueryResult>
+     * @return PromiseInterface<Result>
      */
     public function query(string $sql, array $params = []): PromiseInterface;
 
@@ -25,7 +28,7 @@ interface Transaction
      *
      * @param string $sql SQL statement to execute with optional ? placeholders
      * @param array<int, mixed> $params Optional parameters for prepared statement
-     * @return PromiseInterface<ExecuteResult>
+     * @return PromiseInterface<Result>
      */
     public function execute(string $sql, array $params = []): PromiseInterface;
 
@@ -49,6 +52,14 @@ interface Transaction
     public function fetchValue(string $sql, string|int $column = 0, array $params = []): PromiseInterface;
 
     /**
+     * Prepares a statement for execution within the transaction.
+     *
+     * @param string $sql SQL statement with ? placeholders
+     * @return PromiseInterface<PreparedStatement>
+     */
+    public function prepare(string $sql): PromiseInterface;
+
+    /**
      * Registers a callback to be executed only if the transaction is successfully committed.
      *
      * @param callable(): void $callback The closure to execute on commit.
@@ -61,14 +72,6 @@ interface Transaction
      * @param callable(): void $callback The closure to execute on rollback.
      */
     public function onRollback(callable $callback): void;
-
-    /**
-     * Prepares a statement for execution within the transaction.
-     *
-     * @param string $sql SQL statement with ? placeholders
-     * @return PromiseInterface<PreparedStatement>
-     */
-    public function prepare(string $sql): PromiseInterface;
 
     /**
      * Commits the transaction, making all changes permanent.

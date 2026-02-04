@@ -15,7 +15,7 @@ interface PreparedStatement
      * Execute the prepared statement with the given parameters.
      *
      * @param array<int, mixed> $params The parameters to bind to the statement.
-     * @return PromiseInterface<ExecuteResult|QueryResult>
+     * @return PromiseInterface<Result>
      */
     public function executeStatement(array $params = []): PromiseInterface;
 

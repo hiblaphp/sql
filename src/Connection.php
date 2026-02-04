@@ -7,13 +7,6 @@ use Hibla\Promise\Interfaces\PromiseInterface;
 interface Connection
 {
     /**
-     * Connects to the database.
-     * 
-     * @return PromiseInterface<self>
-     */
-    public function connect(): PromiseInterface;
-
-    /**
      * Ping the connection to the database to check if its online
      * 
      * @return PromiseInterface<void>
@@ -22,18 +15,11 @@ interface Connection
 
  
     /**
-     * Execute a select statement to query a database
+     * Execute an sql query a database
      * 
-     * @return PromiseInterface<QueryResult>
+     * @return PromiseInterface<Result>
      */
     public function query(): PromiseInterface;
-
-    /**
-     * Execute a non Select query to the database like Insert statement
-     * 
-     * @return PromiseInterface<ExecuteResult>
-     */
-    public function execute(): PromiseInterface;
 
 
     /**
