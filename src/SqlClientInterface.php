@@ -62,10 +62,10 @@ interface SqlClientInterface
     /**
      * Begins a database transaction with automatic connection pool management.
      *
-     * @param IsolationLevel|null $isolationLevel Optional transaction isolation level
+     * @param IsolationLevelInterface|null $isolationLevel Optional transaction isolation level
      * @return PromiseInterface<Transaction>
      */
-    public function beginTransaction(?IsolationLevel $isolationLevel = null): PromiseInterface;
+    public function beginTransaction(?IsolationLevelInterface $isolationLevel = null): PromiseInterface;
 
     /**
      * Executes a callback within a database transaction with automatic management and retries.
@@ -74,13 +74,13 @@ interface SqlClientInterface
      *
      * @param callable(Transaction): TResult $callback
      * @param int $attempts Number of times to attempt the transaction (default: 1)
-     * @param IsolationLevel|null $isolationLevel
+     * @param IsolationLevelInterface|null $isolationLevel
      * @return PromiseInterface<TResult>
      */
     public function transaction(
         callable $callback,
         int $attempts = 1,
-        ?IsolationLevel $isolationLevel = null
+        ?IsolationLevelInterface $isolationLevel = null
     ): PromiseInterface;
 
     /**
