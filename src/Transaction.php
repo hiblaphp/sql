@@ -15,28 +15,47 @@ use Hibla\Promise\Interfaces\PromiseInterface;
 interface Transaction
 {
     /**
-     * Executes a SELECT query and returns all matching rows.
+     * Executes a SELECT query and returns the full Result object.
+     * Use this when you need metadata or iteration over rows.
      *
      * @param string $sql SQL query to execute with optional ? placeholders
-     * @param array<int, mixed> $params Optional parameters for prepared statement
+     * @param array<int, mixed> $params Optional parameters
      * @return PromiseInterface<Result>
      */
     public function query(string $sql, array $params = []): PromiseInterface;
 
     /**
-     * Executes a SQL statement (INSERT, UPDATE, DELETE, etc.).
+     * Executes a SQL statement (INSERT, UPDATE, DELETE) and returns the number of affected rows.
      *
-     * @param string $sql SQL statement to execute with optional ? placeholders
-     * @param array<int, mixed> $params Optional parameters for prepared statement
-     * @return PromiseInterface<Result>
+     * @param string $sql SQL statement to execute
+     * @param array<int, mixed> $params Optional parameters
+     * @return PromiseInterface<int> Resolves to the number of affected rows.
      */
     public function execute(string $sql, array $params = []): PromiseInterface;
 
     /**
+     * Executes a SQL statement and returns the last inserted ID.
+     *
+     * @param string $sql SQL statement to execute
+     * @param array<int, mixed> $params Optional parameters
+     * @return PromiseInterface<int> Resolves to the last insert ID.
+     */
+    public function executeGetId(string $sql, array $params = []): PromiseInterface;
+
+    /**
+     * Executes a query and returns a row stream (iterator).
+     *
+     * @param string $sql SQL query to execute
+     * @param array<int, mixed> $params Optional parameters
+     * @return PromiseInterface<RowStream>
+     */
+    public function stream(string $sql, array $params = []): PromiseInterface;
+
+    /**
      * Executes a SELECT query and returns the first matching row.
      *
-     * @param string $sql SQL query to execute with optional ? placeholders
-     * @param array<int, mixed> $params Optional parameters for prepared statement
+     * @param string $sql SQL query to execute
+     * @param array<int, mixed> $params Optional parameters
      * @return PromiseInterface<array<string, mixed>|null>
      */
     public function fetchOne(string $sql, array $params = []): PromiseInterface;
@@ -44,9 +63,9 @@ interface Transaction
     /**
      * Executes a query and returns a single column value from the first row.
      *
-     * @param string $sql SQL query to execute with optional ? placeholders
+     * @param string $sql SQL query to execute
      * @param string|int $column Column name or index (default: 0)
-     * @param array<int, mixed> $params Optional parameters for prepared statement
+     * @param array<int, mixed> $params Optional parameters
      * @return PromiseInterface<mixed>
      */
     public function fetchValue(string $sql, string|int $column = 0, array $params = []): PromiseInterface;

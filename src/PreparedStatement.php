@@ -20,6 +20,14 @@ interface PreparedStatement
     public function execute(array $params = []): PromiseInterface;
 
     /**
+     * Execute the prepared statement returning a stream.
+     *
+     * @param array<int, mixed> $params
+     * @return PromiseInterface<RowStream>
+     */
+    public function executeStream(array $params = []): PromiseInterface;
+
+    /**
      * Close the prepared statement.
      *
      * @return PromiseInterface<void>

@@ -18,7 +18,7 @@ enum IsolationLevel: string implements IsolationLevelInterface
 
     case SERIALIZABLE = 'SERIALIZABLE';
 
-    public function getValue(): string
+    public function toSql(): string
     {
         return $this->value;
     }

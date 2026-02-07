@@ -14,7 +14,7 @@ namespace Hibla\Sql;
  * 
  * @extends \IteratorAggregate<int, array<string, mixed>>
  */
-interface Result extends \IteratorAggregate, \Countable
+interface Result extends \IteratorAggregate
 {
     /**
      * Fetches the next row as an associative array.
@@ -66,7 +66,7 @@ interface Result extends \IteratorAggregate, \Countable
 
     /**
      * Checks if any rows were affected by the operation.
-     * For SELECT queries, use count() or isEmpty() instead.
+     * For SELECT queries, use rowCount() or isEmpty() instead.
      *
      * @return bool
      */

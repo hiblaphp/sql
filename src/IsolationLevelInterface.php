@@ -11,5 +11,10 @@ namespace Hibla\Sql;
  */
 interface IsolationLevelInterface
 {
-    public function getValue(): string;
+    /**
+     * Returns the SQL representation of the isolation level.
+     * 
+     * @return string
+     */
+    public function toSql(): string;
 }
