@@ -11,7 +11,7 @@ namespace Hibla\Sql;
  * - SELECT queries: populated rows with metadata
  * - INSERT/UPDATE/DELETE: execution metadata (affected rows, last insert ID)
  * - Other commands: minimal metadata
- * 
+ *
  * @extends \IteratorAggregate<int, array<string, mixed>>
  */
 interface Result extends \IteratorAggregate

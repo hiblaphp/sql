@@ -12,72 +12,8 @@ use Hibla\Promise\Interfaces\PromiseInterface;
  * Provides a unified API for transaction control, query execution,
  * and savepoint management.
  */
-interface Transaction
+interface Transaction extends QueryInterface
 {
-    /**
-     * Executes a SELECT query and returns the full Result object.
-     * Use this when you need metadata or iteration over rows.
-     *
-     * @param string $sql SQL query to execute with optional ? placeholders
-     * @param array<int, mixed> $params Optional parameters
-     * @return PromiseInterface<Result>
-     */
-    public function query(string $sql, array $params = []): PromiseInterface;
-
-    /**
-     * Executes a SQL statement (INSERT, UPDATE, DELETE) and returns the number of affected rows.
-     *
-     * @param string $sql SQL statement to execute
-     * @param array<int, mixed> $params Optional parameters
-     * @return PromiseInterface<int> Resolves to the number of affected rows.
-     */
-    public function execute(string $sql, array $params = []): PromiseInterface;
-
-    /**
-     * Executes a SQL statement and returns the last inserted ID.
-     *
-     * @param string $sql SQL statement to execute
-     * @param array<int, mixed> $params Optional parameters
-     * @return PromiseInterface<int> Resolves to the last insert ID.
-     */
-    public function executeGetId(string $sql, array $params = []): PromiseInterface;
-
-    /**
-     * Executes a query and returns a row stream (iterator).
-     *
-     * @param string $sql SQL query to execute
-     * @param array<int, mixed> $params Optional parameters
-     * @return PromiseInterface<RowStream>
-     */
-    public function stream(string $sql, array $params = []): PromiseInterface;
-
-    /**
-     * Executes a SELECT query and returns the first matching row.
-     *
-     * @param string $sql SQL query to execute
-     * @param array<int, mixed> $params Optional parameters
-     * @return PromiseInterface<array<string, mixed>|null>
-     */
-    public function fetchOne(string $sql, array $params = []): PromiseInterface;
-
-    /**
-     * Executes a query and returns a single column value from the first row.
-     *
-     * @param string $sql SQL query to execute
-     * @param string|int $column Column name or index (default: 0)
-     * @param array<int, mixed> $params Optional parameters
-     * @return PromiseInterface<mixed>
-     */
-    public function fetchValue(string $sql, string|int $column = 0, array $params = []): PromiseInterface;
-
-    /**
-     * Prepares a statement for execution within the transaction.
-     *
-     * @param string $sql SQL statement with ? placeholders
-     * @return PromiseInterface<PreparedStatement>
-     */
-    public function prepare(string $sql): PromiseInterface;
-
     /**
      * Registers a callback to be executed only if the transaction is successfully committed.
      *
