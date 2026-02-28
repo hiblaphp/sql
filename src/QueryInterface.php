@@ -62,11 +62,11 @@ interface QueryInterface
      * Executes a query and returns a single column value from the first row.
      *
      * @param string $sql SQL query to execute
-     * @param string|int $column Column name or index (default: 0)
+     * @param string|int|null $column Column name or index (default: null, returns first column)
      * @param array<int, mixed> $params Optional parameters
      * @return PromiseInterface<mixed>
      */
-    public function fetchValue(string $sql, string|int $column = 0, array $params = []): PromiseInterface;
+    public function fetchValue(string $sql, string|int|null $column = null, array $params = []): PromiseInterface;
 
     /**
      * Prepares a SQL statement for execution.
