@@ -18,20 +18,10 @@ interface RowStream extends \IteratorAggregate
 
     /**
      * The column names in the streaming result set.
-     * 
+     *
      * @var array<int, string>
      */
     public array $columns { get; }
-
-    /**
-     * Cancels the stream and releases underlying server resources.
-     */
-    public function cancel(): void;
-
-    /**
-     * Checks if the stream has been cancelled.
-     */
-    public function isCancelled(): bool;
 
     /**
      * Iterates over the rows.
