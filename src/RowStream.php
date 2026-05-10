@@ -9,7 +9,7 @@ namespace Hibla\Sql;
  *
  * @extends \IteratorAggregate<int, array<string, mixed>>
  */
-interface RowStream extends \IteratorAggregate
+interface RowStream extends \IteratorAggregate, CancellableStreamInterface
 {
     /**
      * The number of columns in the streaming result set.
