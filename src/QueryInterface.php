@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Hibla\Sql;
 
 use Hibla\Promise\Interfaces\PromiseInterface;
-use Hibla\Sql\Enums\DatabaseDriver;
 
 /**
  * Shared query execution methods common to both client and transaction contexts.

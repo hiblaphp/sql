@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hibla\Sql\Enums;
+namespace Hibla\Sql;
 
 enum DatabaseDriver: string
 {
