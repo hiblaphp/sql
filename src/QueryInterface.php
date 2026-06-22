@@ -5,12 +5,19 @@ declare(strict_types=1);
 namespace Hibla\Sql;
 
 use Hibla\Promise\Interfaces\PromiseInterface;
+use Hibla\Sql\Enums\DatabaseDriver;
 
 /**
  * Shared query execution methods common to both client and transaction contexts.
  */
 interface QueryInterface extends StreamingQueryInterface
 {
+    /**
+     * The database driver dialect this query interface communicates with. 
+     * This is used for determining the correct SQL syntax and features for query-builders.
+     */
+    public DatabaseDriver $driver { get; }
+
     /**
      * Executes any SQL statement and returns full Result object.
      * Use this when you need complete metadata (columns, rows, insert ID, etc.).
